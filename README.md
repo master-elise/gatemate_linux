@@ -166,3 +166,5 @@ Boot HART MIDELEG         : 0x00000222
 Boot HART MEDELEG         : 0x0000b109     
 ```
 but fails to load and execute the Linux kernel
+
+<img src="picture.jpg">
