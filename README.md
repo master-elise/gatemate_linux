@@ -25,3 +25,8 @@ export BR2_EXTERNAL=/home/jmfriedt/WR/linux-on-litex-vexriscv/buildroot
 make litex_vexriscv_defconfig
 ```
 
+Smaller kernel size: disable ``Load all symbols for debugging/ksymoops`` in
+```
+make linux-menuconfig
+General Setup -> Load all symbols for debugging/ksymoops
+```
