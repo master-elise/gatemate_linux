@@ -32,16 +32,20 @@ Smaller Linux kernel size: disable ``Load all symbols for debugging/ksymoops`` i
 make linux-menuconfig
 General Setup -> Load all symbols for debugging/ksymoops
 ```
-and disable all features of ``Kernel hacking`` as well as SMP support (single CPU).
+and disable all features of ``Kernel hacking`` as well as SMP support (single CPU). 
+Enable ``Dead code and data elimination (EXPERIMENTAL)`` in ``General setup``
+
+Remove ``Network File Systems`` and ``Miscellaneous filesystems``, as well as 
+Ethernet and wireless support. Remove IPv6 support, USB and HID.
 
 Edit on the first partition of the SD card image and edit ``boot.json`` to
-shrink addresses below the 8 MB limit. Since ``Image`` is 7283096 bytes:
+shrink addresses below the 8 MB limit. Since ``Image`` is 6005040 bytes:
 
 ```
 {
         "Image"       : "0x40000000",
-        "rv32.dtb"    : "0x406f6000",
-        "opensbi.bin" : "0x40700000"
+        "rv32.dtb"    : "0x405bc000",
+        "opensbi.bin" : "0x405c0000"
 }
 ```
 
@@ -100,11 +104,11 @@ Booting from SDCard in SD-Mode...
 Booting from boot.json...
 Copying Image to 0x40000000 (7283096 bytes)...      
 [########################################] 
-Copying rv32.dtb to 0x406f6000 (3213 bytes)...      
+Copying rv32.dtb to 0x405bc000 (3213 bytes)...      
 [########################################] 
-Copying opensbi.bin to 0x40700000 (263636 bytes)... 
+Copying opensbi.bin to 0x405c0000 (263636 bytes)... 
 [########################################] 
-Executing booted program at 0x40700000     
+Executing booted program at 0x405c0000     
                          
 --============== Liftoff! ==============-- 
                          
@@ -130,7 +134,7 @@ Platform Reboot Device    : ---
 Platform Shutdown Device  : ---   
 Platform Suspend Device   : ---   
 Platform CPPC Device      : ---   
-Firmware Base             : 0x40700000     
+Firmware Base             : 0x405c0000     
 Firmware Size             : 376 KB
 Firmware RW Offset        : 0x40000        
 Firmware RW Size          : 120 KB
