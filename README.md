@@ -1,8 +1,9 @@
 # Linux on CologneChip Gatemate
 
-Install https://www.scala-sbt.org/1.x/docs/Installing-sbt-on-Linux.html#Installing+sbt+on+Linux pour installer sbt (see section Debian)
+Install https://www.scala-sbt.org/1.x/docs/Installing-sbt-on-Linux.html#Installing+sbt+on+Linux 
+to install ``sbt`` (see section Debian)
 
-Install the Gatemate synthesis tools: wget https://github.com/YosysHQ/oss-cad-suite-build/releases/ and
+Install the Gatemate synthesis tools from https://github.com/YosysHQ/oss-cad-suite-build/releases/ and
 ```
 export PATH=$PATH:$HOME/oss-cad-suite/bin
 ```
