@@ -36,11 +36,14 @@ and disable all features of ``Kernel hacking`` as well as SMP support (single CP
 Enable ``Dead code and data elimination (EXPERIMENTAL)`` in ``General setup``
 
 Remove ``Network File Systems`` and ``Miscellaneous filesystems``, as well as 
-Ethernet and wireless support. Remove IPv6 support, USB and HID.
+Ethernet and wireless support. Remove IPv6 support, USB and HID. These changes are
+summarized in the ``linux_dot_config`` which can be copied in the Buildroot 2026.08.2
+to overwrite ``output/build/linux-6.12/.config``.
 
-Edit on the first partition of the SD card image and edit ``boot.json`` to
-shrink addresses below the 8 MB limit. Since ``Image`` is 6005040 bytes:
-
+Edit on the first partition of the SD card image, or in the ``images/`` subdirectory (of
+``linux-on-litex-vexriscv``, not Buildroot) and edit ``boot.json`` to shrink addresses below 
+the 8 MB limit. Since ``Image`` is 6005040 bytes, we try and adapt to the 8 MB of the CologneChip 
+Gatemate Evluation board, by squeezing Linux and the bootloader:
 ```
 {
         "Image"       : "0x40000000",
@@ -49,7 +52,12 @@ shrink addresses below the 8 MB limit. Since ``Image`` is 6005040 bytes:
 }
 ```
 
-leads to
+``./sim.py`` executes Linux in the 64 MB RAM simulation environment and states
+```
+[    0.124570] Memory: 49856K/65536K available (6779K kernel code, 572K rwdata, 1046K rodata, 273K init, 242K bss, 15220K reserved, 0K cma-reserved)
+```
+
+However, on the Gatemate hardware,
 ```
         __   _ __      _  __     
        / /  (_) /____ | |/_/     
@@ -172,3 +180,5 @@ Boot HART MEDELEG         : 0x0000b109
 but fails to load and execute the Linux kernel
 
 <img src="picture.jpg">
+
+Notice the ``reserved_memory`` address range in the devicetree.
